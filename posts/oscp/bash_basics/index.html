@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    
+    <title>Basic bash commands // B0YK4</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Mohamed Abd Elsattar" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://b0yk4.github.io/css/main.min.c69086131f3c165707b92a8a9f7bb02328e1aace76a4a1f205736e4987ea5363.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Basic bash commands"/>
+<meta name="twitter:description" content="#### commands info man ls # manual and all &#34;ls&#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing ### file mangement 1-ordinary files 2- special files 3-directories pwd # current directory ls # list ls -l # with all informations ll ls -il ls -a # with all hidden files ls -i # inode number of files (index of file) find /home/boyka -inum 1150561 #find file with inode number ### creating files cat&gt;file_name # Create a file and enter data and ctrl&#43;D to save the file cat file_name # display the file data touch file_name2 # create and save empty file ### move - rename - copy - delete mv file_name file_name_new	# rename a file or move the file mv file_name /home/boyka/Desktop mv * /home/boyka/Desktop # use regex to selet more than file to move mv f* /home/boyka/Desktop mv /home/boyka/Desktop/file_name ."/>
+
+    <meta property="og:title" content="Basic bash commands" />
+<meta property="og:description" content="#### commands info man ls # manual and all &#34;ls&#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing ### file mangement 1-ordinary files 2- special files 3-directories pwd # current directory ls # list ls -l # with all informations ll ls -il ls -a # with all hidden files ls -i # inode number of files (index of file) find /home/boyka -inum 1150561 #find file with inode number ### creating files cat&gt;file_name # Create a file and enter data and ctrl&#43;D to save the file cat file_name # display the file data touch file_name2 # create and save empty file ### move - rename - copy - delete mv file_name file_name_new	# rename a file or move the file mv file_name /home/boyka/Desktop mv * /home/boyka/Desktop # use regex to selet more than file to move mv f* /home/boyka/Desktop mv /home/boyka/Desktop/file_name ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://b0yk4.github.io/posts/oscp/bash_basics/" />
+<meta property="article:published_time" content="2021-08-23T14:53:32+02:00" />
+<meta property="article:modified_time" content="2021-08-23T14:53:32+02:00" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <body>
+    
+    <header class="app-header">
+      <a href="https://b0yk4.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Mohamed Abd Elsattar" /></a>
+      <h1>B0YK4</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>Cyber Security blog and CTFs writeups </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/b0yk4" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/mo-boyka/" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>Linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/m0_boyka" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+<div class="app-new-header">
+  
+  
+  <h2><a  href="#" onclick="goBack()" > <i class="material-icons"  >arrow_back_ios_new</i>  </a> Basic bash commands</h2>
+  
+  <hr >
+  </div>
+  
+    <main class="app-container">
+
+
+      
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 23, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://b0yk4.github.io/tags/bash/">bash</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/bash/">bash</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#### commands info</span>
+man ls 			    <span style="color:#75715e"># manual and all &#34;ls&#34; info</span>
+whatis ls 		    <span style="color:#75715e"># quit description for what is ls</span> 
+apropos list        		<span style="color:#75715e"># search what tool to do this function</span>
+whoami
+sudo adduser mohamed 		<span style="color:#75715e"># add user</span>
+usermod -aG sudo mohamed 	<span style="color:#75715e"># add sudo user</span>
+shasum  file 				<span style="color:#75715e"># see file hashing</span>
+
+
+<span style="color:#75715e">### file mangement  1-ordinary files 2- special files 3-directories</span>  
+
+pwd 				<span style="color:#75715e"># current directory</span>
+ls  				<span style="color:#75715e"># list</span>
+ls -l  				<span style="color:#75715e">#  with all informations</span>
+ll
+ls -il
+ls -a 				<span style="color:#75715e"># with all hidden files</span>
+ls -i 				<span style="color:#75715e">#  inode number of files (index of file)</span>
+find /home/boyka -inum <span style="color:#ae81ff">1150561</span> <span style="color:#75715e">#find file with inode number</span>
+
+<span style="color:#75715e">### creating files</span>
+
+cat&gt;file_name 		<span style="color:#75715e"># Create a file and enter data and ctrl+D to save the file</span> 
+cat file_name 		<span style="color:#75715e"># display the file data</span> 
+touch file_name2    <span style="color:#75715e"># create and save empty file</span>
+
+<span style="color:#75715e">### move - rename - copy - delete</span>
+
+mv file_name file_name_new					   <span style="color:#75715e"># rename a file or move the file</span>
+mv file_name /home/boyka/Desktop
+mv * /home/boyka/Desktop 					   <span style="color:#75715e"># use regex to selet more than file to move</span>
+mv f* /home/boyka/Desktop
+mv /home/boyka/Desktop/file_name .             <span style="color:#75715e"># . mean the final same location of the file</span> 
+cp file_name /home/boyka/Desktop 			   <span style="color:#75715e"># copy</span> 
+cp file_name /home/boyka/Desktop/file_name_new <span style="color:#75715e"># copy with new name</span>
+rm file_name file_name2 					   <span style="color:#75715e"># delete specific files</span>
+rm * 										   <span style="color:#75715e"># delete all files</span>
+
+<span style="color:#75715e">### display files</span>
+
+cat file_name 		<span style="color:#75715e"># dispay file data</span>
+wc file_name 		<span style="color:#75715e"># display (n1 n2 n3 file_name) its count (line_num  words_num  char._num)</span>
+wc -l file_name 	<span style="color:#75715e"># number of lines</span>
+wc -w file_name 	<span style="color:#75715e"># number of words</span>
+wc -c file_name 	<span style="color:#75715e"># number of char.</span>
+
+<span style="color:#75715e">### standard linux streams (this built-in files work when we creating script or program)</span>
+
+stdin 				<span style="color:#75715e"># (0) this file take the input</span>
+stdout 				<span style="color:#75715e"># (1) giving the output</span>
+stderr 				<span style="color:#75715e"># (2) work and detect errors</span>
+
+<span style="color:#75715e">### directory mangement [hidden files get crated by defalult when create directory { (.)-the informations of current dir (..)-the information of level above dir }]</span>
+
+cd 					<span style="color:#75715e"># change directory</span>
+cd .. 				<span style="color:#75715e"># step back</span>
+mkdir 				<span style="color:#75715e"># make directory</span>
+mkdir boyka<span style="color:#ae81ff">\ </span>tasks  <span style="color:#75715e"># \ to make directory with space separate name (boyka tasks)</span>
+ls -la 				<span style="color:#75715e"># show detail informations with hidden files/directories</span>
+mv -r 				
+cp -r 
+
+<span style="color:#75715e">### permissions [ owner - group - other ] &gt;&gt;( read - write - execute )</span>
+
+<span style="color:#75715e"># [file/dir|owner|group|other]</span>
+-rwxr-xr-x          <span style="color:#75715e"># [-] file</span>
+drwxr-xr--  	    <span style="color:#75715e"># [d] dir</span>
+
+<span style="color:#75715e"># change with symbolic method [u: user / g: group / o:others]</span>
+chmod u+x file_name   		<span style="color:#75715e"># add permission to user</span>
+chmod u-wx file_name		<span style="color:#75715e"># remove permission from user</span>
+chmod u<span style="color:#f92672">=</span>rwx file_name		<span style="color:#75715e"># set the permissions of user</span>
+chmod u+x,g-w,o<span style="color:#f92672">=</span>r file_name
+chmod a<span style="color:#f92672">=</span>rwx file_name 		<span style="color:#75715e"># set for all (u,g and o)</span>
+
+<span style="color:#75715e"># with octal mehod [0:--- , 1:--x , 2:-w- , 3:2+1 , 4:r-- , 5:4+1 , 6:4+2 , 7:4+2+1]</span>
+chmod <span style="color:#ae81ff">775</span> file_name   		<span style="color:#75715e"># 7 for user , 6 for group and 5 for other</span>
+umask 						<span style="color:#75715e"># (0002) get the number that represent the default permissions for new files or dir created [7777-umask=permissions_num]</span>
+umask <span style="color:#ae81ff">027</span>  					<span style="color:#75715e"># change umask number [7777-7027=0750] umask_new=0750</span>
+
+<span style="color:#75715e">### Environment Variables</span>
+env                         <span style="color:#75715e"># show the default variables declars in the environment</span>
+env  boyka<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kshckhdjoj&#34;</span>     <span style="color:#75715e"># declare my own env. variable</span>
+
+.profile                    <span style="color:#75715e"># the file that run automaticaly when you start .... if it contains nothing the system skiped it and go to home directory</span>
+.bash_history               <span style="color:#75715e"># bash comands history</span>
+.bash_logout                <span style="color:#75715e"># log out task</span>
+
+
+<span style="color:#75715e">### Basic Utilities ( printing - sending a mail)</span> 
+<span style="color:#75715e">#   mails in localhost &gt;&gt; var/spool/mail</span>
+
+pr option<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>        <span style="color:#75715e"># ex: pr -2 file | more  &gt;&gt; this will make two colomns</span>
+lpr file                    <span style="color:#75715e"># send to printer</span>
+ 
+$ mail -s “Enter the subject” user1@domain.com
+$ mail -s “The Subject” user1@domain.com &lt; /root/testemail.txt  <span style="color:#75715e"># Send message from a file</span>
+$ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” user1@domain.com 
+$ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” user1@domain.com,user2@domain.com  <span style="color:#75715e"># Multiple recipients</span>
+$ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” -c user1@domain.com,user2@domain.com <span style="color:#75715e"># CC and BCC</span>
+$ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” –r “Tom&lt;tom@gmail.com&gt;” user1@domain.com <span style="color:#75715e"># Specify From name and address</span>
+<span style="color:#75715e">#  Specify “Reply-To” address</span>
+    $ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” replyto<span style="color:#f92672">=</span> tom@gmail.com user1@domain.com
+
+    $ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” replyto<span style="color:#f92672">=</span> “Tomtom@gmail.com” user1@domain.com
+<span style="color:#75715e"># Attachments</span>
+
+The option –a is used to add an attachment along with the email.
+
+    $ echo “THIS IS A TEST EMAIL” | mail -s “Enter the subject” –r “Tom&lt;tom@gmail.com&gt;” –a /path/to/file user1@domain.com
+
+
+<span style="color:#75715e">### pipes and filters</span>
+
+<span style="color:#75715e"># pipe &gt;&gt;&gt;&gt;   A pipe is a means by which the output from one process becomes the input to a second. In technical terms,</span>
+<span style="color:#75715e">#             the standard output (stout) of one command is sent to the standard input (stdin) of a second command</span>
+
+command_1 | command_2 | command_3 | .... | command_N 
+$ ls -l | more                          <span style="color:#75715e"># list and get the --more-- option == {  ls -l &gt; temp , more &lt; temp , rm temp}</span>
+$ sort record.txt | uniq                <span style="color:#75715e"># This will sort the given file and print the unique values only</span>
+$ cat sample2.txt | head -7 | tail -5   <span style="color:#75715e"># select first 7 lines and last 5 lines from the file and print those lines which are common to both of them</span>
+$ ls -l | find ./ -type f -name <span style="color:#e6db74">&#34;*.txt&#34;</span> -exec grep <span style="color:#e6db74">&#34;program&#34;</span> <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> <span style="color:#75715e"># select files with .txt extension in the given directory</span> 
+                                                                   <span style="color:#75715e"># and search for pattern like “program” in the above example and print those ine which have program in them</span>
+$ cat result.txt | grep <span style="color:#e6db74">&#34;Rajat Dua&#34;</span> | tee file2.txt | wc -l     <span style="color:#75715e"># select Rajat Dua and store them in file2.txt and print total number of lines matching Rajat Dua</span>
+
+
+<span style="color:#75715e"># filter &gt;&gt;&gt;&gt; A pipe can pass the standard output of one operation to the standard input of another,</span> 
+<span style="color:#75715e">#             but a filter can modify the stream. A filter takes the standard input, does something useful with it,</span>
+<span style="color:#75715e">#             and then returns it as a standard output. Linux has a large number of filters.</span> 
+<span style="color:#75715e">#             Some useful ones are the commands awk, grep, sed, spell, and wc.</span> 
+
+ head -n      <span style="color:#75715e"># Show the first n lines.</span>
+ tail -n      <span style="color:#75715e"># Show the last n lines.</span>
+ sort         <span style="color:#75715e"># Sort lines in a given way [sort -n file , sort -r file , sort -nr , sort -f ].</span>
+ wc           <span style="color:#75715e"># How many words, characters and lines.</span>
+ grep         <span style="color:#75715e"># Search for a given pattern.</span>
+
+ <span style="color:#75715e">### File editors [ ex. : gedit - nano - vi,vim ]</span>
+ 
+ ifconfig  
+
+<span style="color:#75715e">#to check connectivity between my machine and any ip</span> 
+ping www.google.com  <span style="color:#75715e">#or by ip</span> 
+
+<span style="color:#75715e"># the resolution between every MAC and IP</span>
+arp   <span style="color:#75715e">#Address Resolution Protocol</span>
+
+<span style="color:#75715e"># to connect to file server (up and down files)</span>
+ftp  					  <span style="color:#75715e">#File Transfer Protocol</span>
+	&gt; open ftp.microsoft.com  <span style="color:#75715e"># entry with usr name and password</span>
+	&gt; bye					  <span style="color:#75715e"># for exit</span>
+
+<span style="color:#75715e">#for get IP address for any site</span>
+nslookup 
+	&gt; www.google.com
+		Server:		192.168.1.1
+		Address:	192.168.1.1#53
+
+		Non-authoritative answer:
+		Name:	www.google.com
+		Address: 172.217.18.36
+	&gt; exit
+
+<span style="color:#75715e">#to recognize the routing table components of my device</span>
+route
+
+<span style="color:#75715e"># show all my device connections</span> 
+netstate
+
+<span style="color:#75715e"># to scan ports</span>
+nmap 127.0.0.1 
+nmap -p 1-65535 127.0.0.1    	<span style="color:#75715e"># -p to choose a range</span>
+nmap -p 1-65535 -m <span style="color:#ae81ff">10</span> 127.0.0.1 <span style="color:#75715e"># -m to issues several prob requests at the same time</span>
+<span style="color:#75715e"># Scanning Multiple Hosts</span> 
+nmap host1 host2 host3          <span style="color:#75715e"># by names or ip</span>
+nmap 192.168.1.*                <span style="color:#75715e"># warning: never try to scan *.*.*.*  on any machine connected to the Internet</span>
+nmap 192.168.1.0/24				<span style="color:#75715e"># by CIDR notation</span>
+<span style="color:#75715e"># scanning ranges</span>
+nmap 192.168.1.10-35
+nmap 192.168.1,2,3,4.10
+nmap 192.168.1,2.3,4.10-35           
+<span style="color:#75715e"># nmap flags and options</span>
+-sT 				Perform a full open TCP scan 
+-sS 				Perform a SYN <span style="color:#f92672">(</span>stealth<span style="color:#f92672">)</span> TCP scan 
+-sU 				Perform a UDP scan 
+-sR or -sV 			Perform an RPC service scan <span style="color:#f92672">(</span>should be used in conjunction with another scan type<span style="color:#f92672">)</span> 
+-A 					aggressive scan <span style="color:#66d9ef">for</span> more info
+-O 					Try remote OS detection 
+-O --osscan-guess 	guess the OS <span style="color:#66d9ef">if</span> not detected
+-P0 				Donít try to see <span style="color:#66d9ef">if</span> a host is up before scanning it 
+-p 					&lt;port range&gt; Specify a range of ports to scan 
+-M 					&lt;max connections&gt; The maximum number of parallel connection attempts to make at one time. For LANs, should be no more than 18. For slow links <span style="color:#f92672">(</span>WAN, Internet<span style="color:#f92672">)</span>, this can be significantly higher. 
+
+<span style="color:#75715e"># to capture and analyze network traffic going through your system and for troubleshooting</span>
+tcpdump 
+-x 							<span style="color:#75715e"># display all packet in hex</span>
+-s 1500						<span style="color:#75715e"># snap length ,1500 byte,if 0 means show all packet</span>
+-w file  					<span style="color:#75715e"># to write in file</span>
+-r file 	
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>

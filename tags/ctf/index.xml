@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CTF on B0YK4</title>
+    <link>https://b0yk4.github.io/tags/ctf/</link>
+    <description>Recent content in CTF on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 16:26:40 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android101</title>
+      <link>https://b0yk4.github.io/posts/cybertalents/rverse/android101/</link>
+      <pubDate>Mon, 23 Aug 2021 16:26:40 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/cybertalents/rverse/android101/</guid>
+      <description>Category: Malware Reverse Engineering Level: medium Points: 100
+challenge: android101
+$ d2j-dex2jar -f android101.apk by opening the jar file with JD-GUI
+validate() function in MainActivity:
+String Validate(String paramString) { StringBuilder stringBuilder = new StringBuilder(paramString); for (byte b = 0; b &amp;lt; stringBuilder.length(); b++) { for (byte b1 = b; b1 &amp;lt; stringBuilder.length() - 1; b1++) { char c = stringBuilder.charAt(b1); stringBuilder.setCharAt(b1, stringBuilder.charAt(b1 + 1)); stringBuilder.setCharAt(b1 + 1, c); } } if (stringBuilder.</description>
+    </item>
+    
+    <item>
+      <title>Rokai challange</title>
+      <link>https://b0yk4.github.io/posts/cybertalents/rokai/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/cybertalents/rokai/</guid>
+      <description>Category: Malware Reverse Engineering Level: medium Points: 100
+apk: If you don&amp;rsquo;t like the road you&amp;rsquo;re walking, start paving another one.
+ first of all the discription indicates us that there is something missing and needs to provided, let&amp;rsquo;s see what that thing is.
+there are more than one way for the solution i&amp;rsquo;ll explain the way i used.
+ tools:
+ dex2jar JD-GUI apk studio android studio  i tried to reverse the app firt from the smali output that i get from apktool but it not the better way for a noob like me.</description>
+    </item>
+    
+  </channel>
+</rss>

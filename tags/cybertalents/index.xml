@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CyberTalents on B0YK4</title>
+    <link>https://b0yk4.github.io/tags/cybertalents/</link>
+    <description>Recent content in CyberTalents on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 14:53:32 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tags/cybertalents/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rokai challange</title>
+      <link>https://b0yk4.github.io/posts/cybertalents/rokai/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/cybertalents/rokai/</guid>
+      <description>Category: Malware Reverse Engineering Level: medium Points: 100
+apk: If you don&amp;rsquo;t like the road you&amp;rsquo;re walking, start paving another one.
+ first of all the discription indicates us that there is something missing and needs to provided, let&amp;rsquo;s see what that thing is.
+there are more than one way for the solution i&amp;rsquo;ll explain the way i used.
+ tools:
+ dex2jar JD-GUI apk studio android studio  i tried to reverse the app firt from the smali output that i get from apktool but it not the better way for a noob like me.</description>
+    </item>
+    
+  </channel>
+</rss>

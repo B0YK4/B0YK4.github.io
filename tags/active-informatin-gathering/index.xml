@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>active informatin gathering on B0YK4</title>
+    <link>https://b0yk4.github.io/tags/active-informatin-gathering/</link>
+    <description>Recent content in active informatin gathering on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 14:53:32 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tags/active-informatin-gathering/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OSCP active info gathering</title>
+      <link>https://b0yk4.github.io/posts/oscp/mod7-active_info/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/mod7-active_info/</guid>
+      <description>DNS enumeration ip look up
+$ host -t A dns.google #lookup $ host -t PTR 8.8.8.8 #reverse lookup host records more than 30 record A-PTR-CNAME-MX(domain that handel the server)-ns.. all text data needed for bruteforce seclists, installed in linux and used with commands or we can use the data from github
+$ seclists zone transfers to get more info about target domains and the internal network
+$ host -l &amp;lt;domain&amp;gt; &amp;lt;dns server address&amp;gt; to get dns servers addresses and try bruteforce the domain named if you got no ns records with (-t ns)</description>
+    </item>
+    
+  </channel>
+</rss>

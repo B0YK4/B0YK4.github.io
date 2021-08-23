@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on B0YK4</title>
+    <link>https://b0yk4.github.io/tags/bash/</link>
+    <description>Recent content in bash on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Aug 2021 14:53:32 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Basic bash commands</title>
+      <link>https://b0yk4.github.io/posts/oscp/bash_basics/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/bash_basics/</guid>
+      <description>#### commands info man ls # manual and all &amp;#34;ls&amp;#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing ### file mangement 1-ordinary files 2- special files 3-directories pwd # current directory ls # list ls -l # with all informations ll ls -il ls -a # with all hidden files ls -i # inode number of files (index of file) find /home/boyka -inum 1150561 #find file with inode number ### creating files cat&amp;gt;file_name # Create a file and enter data and ctrl+D to save the file cat file_name # display the file data touch file_name2 # create and save empty file ### move - rename - copy - delete mv file_name file_name_new	# rename a file or move the file mv file_name /home/boyka/Desktop mv * /home/boyka/Desktop # use regex to selet more than file to move mv f* /home/boyka/Desktop mv /home/boyka/Desktop/file_name .</description>
+    </item>
+    
+    <item>
+      <title>OSCP active info gathering</title>
+      <link>https://b0yk4.github.io/posts/oscp/mod7-active_info/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/mod7-active_info/</guid>
+      <description>DNS enumeration ip look up
+$ host -t A dns.google #lookup $ host -t PTR 8.8.8.8 #reverse lookup host records more than 30 record A-PTR-CNAME-MX(domain that handel the server)-ns.. all text data needed for bruteforce seclists, installed in linux and used with commands or we can use the data from github
+$ seclists zone transfers to get more info about target domains and the internal network
+$ host -l &amp;lt;domain&amp;gt; &amp;lt;dns server address&amp;gt; to get dns servers addresses and try bruteforce the domain named if you got no ns records with (-t ns)</description>
+    </item>
+    
+    <item>
+      <title>OSCP bash module</title>
+      <link>https://b0yk4.github.io/posts/oscp/oscp_bash/</link>
+      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/oscp/oscp_bash/</guid>
+      <description>#### commands info man ls # manual and all &amp;#34;ls&amp;#34; info whatis ls # quit description for what is ls apropos list # search what tool to do this function whoami sudo adduser mohamed # add user usermod -aG sudo mohamed # add sudo user shasum file # see file hashing pkg -i &amp;#39;***&amp;#39; # install package apt remove &amp;#39;pkg&amp;#39;	# remove programe package apt remove --purge &amp;#39;pkg&amp;#39; # remove package configiration # search locate rockyou.</description>
+    </item>
+    
+  </channel>
+</rss>

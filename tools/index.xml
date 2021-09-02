@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on B0YK4</title>
+    <link>https://b0yk4.github.io/tools/</link>
+    <description>Recent content in Tools on B0YK4</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 02 Sep 2021 09:18:18 +0200</lastBuildDate>
+    
+	<atom:link href="https://b0yk4.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Forensics</title>
+      <link>https://b0yk4.github.io/tools/forensics/</link>
+      <pubDate>Thu, 02 Sep 2021 09:18:18 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/tools/forensics/</guid>
+      <description>Digital Forensics Digital Forensics Tools that used in Incident Response CyberTalents scholarship
+I wish you all the best of luck in the CTF &amp;lt;3
+1. Steganography  stegsolve linux
+GUI tool for viewing hidden data in images by aplaying filter on pixels values
+installation:
+wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar chmod +x stegsolve.jar mkdir bin mv stegsolve.jar bin/  steghide linux
+for hiding/extracting txt in/from jpg files using passphrase
+installation:
+sudo apt-get install steghide  stegcracker linux</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,10 +5,21 @@
     <link>https://b0yk4.github.io/</link>
     <description>Recent content on B0YK4</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Sep 2021 01:13:51 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 23 Sep 2021 20:55:31 +0200</lastBuildDate>
     
 	<atom:link href="https://b0yk4.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ssh Port Redirection and Tunneling</title>
+      <link>https://b0yk4.github.io/posts/topics/ssh_tunneling/</link>
+      <pubDate>Thu, 23 Sep 2021 20:55:31 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/posts/topics/ssh_tunneling/</guid>
+      <description>Tunneling a protocol involves encapsulating it within a different protocol. By using various tunneling techniques, we can carry a given protocol over an incompatible delivery network, or provide a secure path through an untrusted network.
+scenarios of using tunneling:
+ making a secure connection while using unencrypted protocols such as http, imap, pop3, smtp.. pivoting/lateral movement (accessing other isolated machines throw a compromised machine) bypass firewall rules (ROCKS proxy)   ssh server configuration first install ssh service to run shh server</description>
+    </item>
     
     <item>
       <title>Ethical hacking Intro</title>
@@ -16,7 +27,7 @@
       <pubDate>Sun, 19 Sep 2021 01:13:51 +0200</pubDate>
       
       <guid>https://b0yk4.github.io/posts/iti/ethical_hacking/</guid>
-      <description>Notes from ethical hacking introduction course ITI (maharahtech), you can find this course here, delivered in arabic.
+      <description>Notes from ethical hacking introduction course ITI (maharah-tech), you can find this course here, delivered in arabic.
  1. Recon Search engines:  archive : https://web.archive.org/ netcraft : sites pipl : people  Google search and shodan:  google searching dorks google hacking database www.exploit-db.com shodan.io  Website Reconnaissance Tools:  Web Data Extractor (GUI tool): extracting data from a website, http://www.webextractor.com/download.htm HTTrack (GUI tool) : mirroring a web site for offline browsing, https://www.</description>
     </item>
     

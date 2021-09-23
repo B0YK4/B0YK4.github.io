@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    
+    <title>ssh Port Redirection and Tunneling // B0YK4</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Mohamed Abd Elsattar" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://b0yk4.github.io/css/main.min.c69086131f3c165707b92a8a9f7bb02328e1aace76a4a1f205736e4987ea5363.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ssh Port Redirection and Tunneling"/>
+<meta name="twitter:description" content="Tunneling a protocol involves encapsulating it within a different protocol. By using various tunneling techniques, we can carry a given protocol over an incompatible delivery network, or provide a secure path through an untrusted network.
+scenarios of using tunneling:
+ making a secure connection while using unencrypted protocols such as http, imap, pop3, smtp.. pivoting/lateral movement (accessing other isolated machines throw a compromised machine) bypass firewall rules (ROCKS proxy)   ssh server configuration first install ssh service to run shh server"/>
+
+    <meta property="og:title" content="ssh Port Redirection and Tunneling" />
+<meta property="og:description" content="Tunneling a protocol involves encapsulating it within a different protocol. By using various tunneling techniques, we can carry a given protocol over an incompatible delivery network, or provide a secure path through an untrusted network.
+scenarios of using tunneling:
+ making a secure connection while using unencrypted protocols such as http, imap, pop3, smtp.. pivoting/lateral movement (accessing other isolated machines throw a compromised machine) bypass firewall rules (ROCKS proxy)   ssh server configuration first install ssh service to run shh server" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://b0yk4.github.io/posts/topics/ssh_tunneling/" />
+<meta property="article:published_time" content="2021-09-23T20:55:31+02:00" />
+<meta property="article:modified_time" content="2021-09-23T20:55:31+02:00" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <body>
+    
+    <header class="app-header">
+      <a href="https://b0yk4.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Mohamed Abd Elsattar" /></a>
+      <h1>B0YK4</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>Cyber Security blog and CTFs writeups </p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/b0yk4" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/mo-boyka/" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>Linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+
+  
+    <main class="app-container">
+
+
+  
+        
+        <h2><a  href="#" onclick="goBack()" > <i class="material-icons"  >arrow_back_ios_new</i>  </a> ssh Port Redirection and Tunneling</h2>
+        
+        <hr >
+
+      
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 23, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://b0yk4.github.io/tags/ethical_hacking/">Ethical_hacking</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/pentesting/">Pentesting</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/ssh_tunneling/">ssh_tunneling</a>
+              <a class="tag" href="https://b0yk4.github.io/tags/oscp/">OSCP</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Tunneling a protocol involves encapsulating it within a different protocol. By using various
+tunneling techniques, we can carry a given protocol over an incompatible delivery network, or
+provide a secure path through an untrusted network.</p>
+<p><img src="/tunnel.png" alt="ssh tunneling"></p>
+<p>scenarios of using tunneling:</p>
+<ul>
+<li>making a secure connection while using unencrypted protocols such as http, imap, pop3, smtp..</li>
+<li>pivoting/lateral movement (accessing other isolated machines throw a compromised machine)</li>
+<li>bypass firewall rules (ROCKS proxy)</li>
+</ul>
+<hr>
+<h2 id="ssh-server-configuration">ssh server configuration</h2>
+<p>first install ssh service to run <code>shh server</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install openssh-server
+</code></pre></div><p>file path <code>/etc/ssh/sshd_config</code></p>
+<p>options:</p>
+<ul>
+<li>AllowTcpForwarding:
+<ul>
+<li><code>yes</code>[default]     allow all tcp</li>
+<li><code>no</code>               prevent all tcp</li>
+<li><code>local</code></li>
+<li><code>remote</code></li>
+</ul>
+</li>
+<li>GatewayPorts (remote port forwarding)
+<ul>
+<li><code>yes</code>             allow anyone to connect</li>
+<li><code>no</code>[default]     only local connections allowed</li>
+<li><code>clintspecified</code>  specify an ip address to allow connection (<strong>==</strong> <code>yes</code> option if no one specified)</li>
+</ul>
+</li>
+<li>PermitRootLogin
+set to <code>yes</code> to allow root login</li>
+</ul>
+<p>uncomment any option you need to set on <code>sshd_config</code> file (delete the <code>#</code>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">...
+Port 22
+...
+PermitRootLogin yes
+...
+AllowTcpForwarding yes
+GatewayPorts clientspecified
+...
+</code></pre></div><blockquote>
+<p>restart ssh service after editing the config file</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ service ssh restart
+</code></pre></div><hr>
+<h2 id="local-port-forwarding">Local port forwarding</h2>
+<p>SSH local port forwarding allows us to tunnel a local port to a remote server using SSH as the
+transport protocol.</p>
+<p><img src="/local.png" alt="local"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh <span style="color:#f92672">[</span>username@address<span style="color:#f92672">]</span> -p &lt;ssh_port&gt; -L bindport:host:hostport -N
+</code></pre></div><p><code>-N</code> to prevent the user from executing commands on the server</p>
+<p><code>-L</code> for local forwarding</p>
+<p><code>bind_port</code> client address and port</p>
+<p><code>host:host_port</code> destination address and port</p>
+<p><code>[username@address]</code> ssh server</p>
+<h3 id="example">Example:</h3>
+<table>
+<thead>
+<tr>
+<th>machine</th>
+<th>address</th>
+<th>port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client</td>
+<td>localhost</td>
+<td>8080</td>
+</tr>
+<tr>
+<td>ssh_server</td>
+<td>192.168.1.16</td>
+<td>22</td>
+</tr>
+<tr>
+<td>host</td>
+<td>192.168.1.17</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>first configure ssh server</li>
+<li>then run this command on client machine</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ssh ssh_server@192.168.1.16 -p <span style="color:#ae81ff">22</span> -L 8080:192.168.1.17:80 -N
+</code></pre></div><p>for windows machines use Plink (PuTTY Link):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; plink.exe ssh_server@192.168.1.16 -p 22 -L 8080:192.168.1.17:80 -N
+</code></pre></div><ol start="3">
+<li>now if you open <code>http://localhost:8080</code> you will reach the host from your client machine</li>
+</ol>
+<hr>
+<h2 id="remote-port-forwarding-pivoting">Remote port forwarding (pivoting)</h2>
+<p>this type used when you want to access an internal(isolated) machine using a compromised machine, in this case the ssh server is the attacker machine, connection is established from the internal machine and the attacker machine is listen on a specified port</p>
+<p><img src="/remote.png" alt="remote"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">ssh [username@address] -p &lt;ssh_port&gt; -R bindport:host:hostport -N
+</code></pre></div><p><code>-N</code> to prevent the user from executing commands on the server</p>
+<p><code>-R</code> for remote forwarding</p>
+<p><code>bindport</code> compromised machine address and port</p>
+<p><code>host:hostport</code> destination address and port</p>
+<p><code>[username@address]</code> attacker machine | ssh server</p>
+<h3 id="example-1">Example:</h3>
+<table>
+<thead>
+<tr>
+<th>machine</th>
+<th>address</th>
+<th>port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Attacker (ssh server)</td>
+<td>192.168.2.5</td>
+<td>2221 |4444</td>
+</tr>
+<tr>
+<td>compromised</td>
+<td>192.168.1.16</td>
+<td>2221|21|</td>
+</tr>
+<tr>
+<td>Target (ftp)</td>
+<td>192.168.1.17</td>
+<td>21 | 4444</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>configure your attacking machine ssh server</li>
+<li>run this command on compromised machine</li>
+</ol>
+<p>linux:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ssh Attacker@192.168.2.5 -p <span style="color:#ae81ff">22</span> -R 2221:192.168.1.17:21 -R 4444:192.168.1.17:4444 -N
+</code></pre></div><p>windows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; plink.exe Attacker@192.168.2.5 -p 22 -R 2221:192.168.1.17:21 -R 4444:192.168.1.17:4444 -N
+</code></pre></div><p>in this scenario we used two <code>-R</code> with two ports, one for sending the payload to the ftp server (21), and the other one for connecting the shell (4444).</p>
+<ol start="3">
+<li>now after sending your payload to <code>localhost 2221</code> you should get the shell if you connect to port 4444 <code>nc 127.0.0.1 4444</code></li>
+</ol>
+<hr>
+<h2 id="dynamic-port-forwarding-socks-proxy">Dynamic port forwarding (SOCKS proxy)</h2>
+<p>in this type the ssh server works as proxy to bypass the firewall configuration and giving client an access to reach a blocked service.
+<img src="/dynamic.png" alt="dynamic"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">ssh [username@address] -p &lt;ssh_port&gt; -D &lt;bindport&gt; -N
+</code></pre></div><p><code>-N</code> to prevent the user from executing commands on the server</p>
+<p><code>-D</code> for Dynamic forwarding</p>
+<p><code>bindport</code> compromised machine address and port</p>
+<h3 id="example-2">Example:</h3>
+<table>
+<thead>
+<tr>
+<th>machine</th>
+<th>address</th>
+<th>port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOCKS proxy (ssh server)</td>
+<td>192.168.2.5</td>
+<td>22</td>
+</tr>
+<tr>
+<td>client</td>
+<td>local</td>
+<td>5555</td>
+</tr>
+<tr>
+<td>service</td>
+<td>site.com</td>
+<td>443</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>configure the ssh server</li>
+<li>run this command on client machine to connect</li>
+</ol>
+<p>linux:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ssh proxy@192.168.2.5 -p <span style="color:#ae81ff">22</span> -D <span style="color:#ae81ff">5555</span> -N
+</code></pre></div><p>windows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">&gt; plink.exe proxy@192.168.2.5 -p 22 -D 5555 -N
+</code></pre></div><ol start="3">
+<li>configure your browser for SOCKS proxy <code>localhost</code> and port <code>5555</code>.</li>
+<li>now if you tried to visit <code>https://site.com</code> from client browser it should be reachable.</li>
+</ol>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>

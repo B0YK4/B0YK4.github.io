@@ -5,26 +5,44 @@
     <link>https://b0yk4.github.io/tags/</link>
     <description>Recent content in Tags on B0YK4</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Sep 2021 01:13:51 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 23 Sep 2021 20:55:31 +0200</lastBuildDate>
     
 	<atom:link href="https://b0yk4.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Ethical hacking</title>
-      <link>https://b0yk4.github.io/tags/ethical-hacking/</link>
-      <pubDate>Sun, 19 Sep 2021 01:13:51 +0200</pubDate>
+      <title>Ethical_hacking</title>
+      <link>https://b0yk4.github.io/tags/ethical_hacking/</link>
+      <pubDate>Thu, 23 Sep 2021 20:55:31 +0200</pubDate>
       
-      <guid>https://b0yk4.github.io/tags/ethical-hacking/</guid>
+      <guid>https://b0yk4.github.io/tags/ethical_hacking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OSCP</title>
+      <link>https://b0yk4.github.io/tags/oscp/</link>
+      <pubDate>Thu, 23 Sep 2021 20:55:31 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/tags/oscp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Pentesting</title>
       <link>https://b0yk4.github.io/tags/pentesting/</link>
-      <pubDate>Sun, 19 Sep 2021 01:13:51 +0200</pubDate>
+      <pubDate>Thu, 23 Sep 2021 20:55:31 +0200</pubDate>
       
       <guid>https://b0yk4.github.io/tags/pentesting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh_tunneling</title>
+      <link>https://b0yk4.github.io/tags/ssh_tunneling/</link>
+      <pubDate>Thu, 23 Sep 2021 20:55:31 +0200</pubDate>
+      
+      <guid>https://b0yk4.github.io/tags/ssh_tunneling/</guid>
       <description></description>
     </item>
     
@@ -142,15 +160,6 @@
       <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
       
       <guid>https://b0yk4.github.io/tags/machine/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OSCP</title>
-      <link>https://b0yk4.github.io/tags/oscp/</link>
-      <pubDate>Mon, 23 Aug 2021 14:53:32 +0200</pubDate>
-      
-      <guid>https://b0yk4.github.io/tags/oscp/</guid>
       <description></description>
     </item>
     
